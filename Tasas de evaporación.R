@@ -7,6 +7,7 @@ library(skimr)
 library(ggridges)
 library(viridis)
 library(ggrepel)
+library(readxl)
 
 datos_observatorio <- read_excel("Observatorio.xlsx")
 
@@ -47,23 +48,6 @@ datos_observatorio <- datos_observatorio %>%
 # Datos sobre la paleta de colores se pueden encontrar en este link:
 # https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
 
-
-tmed_ridges <- ggplot(datos_observatorio) +
-  geom_density_ridges_gradient(scale = 3.5, rel_min_height = 0.01, aes(x = tmed, y = as.factor(month), fill = ..x..)) +
-  scale_fill_viridis(name = "Temp. [C]", option = "magma") +
-  labs(title = 'Distribución de Temperaturas medias mensuales en Córdoba',
-       subtitle = "Distribución de registro de temperaturas medias de Córdoba desde 1961 a 2021",
-       x = "Temperatura media diaria en C",
-       y = "Mes") +
-  theme_ridges() +
-  theme(
-    legend.position="none",
-    panel.spacing = unit(0.1, "lines"),
-    strip.text.x = element_text(size = 8),
-    axis.title.x = element_text(hjust = 0.5),
-    axis.title.y = element_text(hjust = 0.5),
-  )
-
 hum_relat_ridges <- ggplot(datos_observatorio) +
   geom_density_ridges_gradient(scale = 3.5, rel_min_height = 0.01, aes(x = hum_relat, y = as.factor(month), fill = ..x..)) +
   scale_fill_viridis(name = "Hum. Relat. [%]", option = "mako") +
@@ -78,9 +62,9 @@ hum_relat_ridges <- ggplot(datos_observatorio) +
     strip.text.x = element_text(size = 8),
     axis.title.x = element_text(hjust = 0.5),
     axis.title.y = element_text(hjust = 0.5),
-  )
-
-plot(hum_relat_ridges)
+    plot.title = element_text(hjust = 0),
+    plot.subtitle = element_text(hjust = 0, size = 10),
+    plot.title.position = "plot")
 
 vto_max_veloc_ridges <- ggplot(datos_observatorio) +
   geom_density_ridges_gradient(scale = 3.5, rel_min_height = 0.01, aes(x = vto_max_veloc, y = as.factor(month), fill = ..x..)) +
@@ -97,18 +81,17 @@ vto_max_veloc_ridges <- ggplot(datos_observatorio) +
     strip.text.x = element_text(size = 8),
     axis.title.x = element_text(hjust = 0.5),
     axis.title.y = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0),
+    plot.subtitle = element_text(hjust = 0, size = 10),
+    plot.title.position = "plot"
   )
-
-plot(tmed_ridges)
-plot(hum_relat_ridges)
-plot(vto_max_veloc_ridges)
 
 tmax_ridges <- ggplot(datos_observatorio) +
   geom_density_ridges_gradient(scale = 3.5, rel_min_height = 0.01, aes(x = tmax, y = as.factor(month), fill = ..x..)) +
   scale_fill_viridis(name = "Temp. [C]", option = "magma") +
   labs(title = 'Distribución de Temperaturas máximas mensuales en Córdoba',
        subtitle = "Distribución de registro de temperaturas máximas de Córdoba desde 1961 a 2021",
-       x = "Temperatura media diaria en C",
+       x = "Temperatura máxima diaria en ºC",
        y = "Mes") +
   theme_ridges() +
   theme(
@@ -117,9 +100,14 @@ tmax_ridges <- ggplot(datos_observatorio) +
     strip.text.x = element_text(size = 8),
     axis.title.x = element_text(hjust = 0.5),
     axis.title.y = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0),
+    plot.subtitle = element_text(hjust = 0, size = 10),
+    plot.title.position = "plot"
   )
 
 plot(tmax_ridges)
+plot(hum_relat_ridges)
+plot(vto_max_veloc_ridges)
 
 # Ahora que en función de los ridge plots hemos podido establecer que las distribuciones de los parámetros 
 # que usaremos son normales, necesitaremos obtener mes a mes el promedio y el desvio de cada parámetro
@@ -141,8 +129,6 @@ datos_observatorio_mensual <- datos_observatorio %>%
             vto_max_veloc_desvio = sd(vto_max_veloc),
             vto_med_veloc_promedio = mean(vto_med_veloc),
             vto_med_veloc_desvio = sd(vto_med_veloc))
-
-head(datos_observatorio_mensual)
 
 # Algunos links útiles sobre simulaciones:
 # https://www.countbayesie.com/blog/2015/3/3/6-amazing-trick-with-monte-carlo-simulations
@@ -183,8 +169,8 @@ tasas_de_evaporacion_ridges <- ggplot(datos_observatorio_simulados) +
                                    fill = ..x..)) +
   scale_fill_viridis(name = "Temp. [C]", option = "turbo") +
   labs(title = 'Distribución de tasas de evaporación mensuales en Córdoba',
-       subtitle = "Distribución de simulación de tasas de evaporación para Córdoba
-       a partir de datos de clima de 1961 a 2021.",
+       subtitle = "Distribución de simulación de tasas de evaporación para Córdoba a partir de datos de clima de 1961 a 2021, 
+considerando que la temperatura del hormigón es aproximadamente igual a la temperatura ambiente.",
        x = "Tasa de evaporación ( Kg/m^2/hr)",
        y = "Mes") +
   theme_ridges() +
@@ -195,6 +181,9 @@ tasas_de_evaporacion_ridges <- ggplot(datos_observatorio_simulados) +
     strip.text.x = element_text(size = 8),
     axis.title.x = element_text(hjust = 0.5),
     axis.title.y = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0),
+    plot.subtitle = element_text(hjust = 0, size = 10),
+    plot.title.position = "plot"
   )
 
 plot(tasas_de_evaporacion_ridges)
@@ -215,8 +204,6 @@ datos_observatorio_mensual_simulacion <- datos_observatorio_mensual_simulacion %
 
 names(datos_observatorio_mensual_simulacion)[1] <- "month"
 
-head(datos_observatorio_mensual_simulacion)
-
 probabilidades_mensuales_tasa_0.5 <- ggplot(datos_observatorio_mensual_simulacion)+
   geom_col(mapping = aes(x= month ,y = probabilidad_tasa_mayor_igual_0.5, fill = probabilidad_tasa_mayor_igual_0.5))+
   labs(title = "Probabilidades mensuales para tasas de Evaporación",
@@ -225,11 +212,12 @@ probabilidades_mensuales_tasa_0.5 <- ggplot(datos_observatorio_mensual_simulacio
        x = "Mes",
        y = "Probabilidad")+
   theme_ridges() +
-  scale_fill_viridis(option = "turbo")+
   scale_x_continuous(breaks = seq(1, 12, by = 1)) +
   theme(axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none")
+
+plot(probabilidades_mensuales_tasa_0.5)
 
 # Todo lo analizado anteriormente suponia que la temperatura del hormigón era similar
 # a la temperatura ambiente. Ahora repetiré el analisis para cuatro temperaturas del
@@ -364,7 +352,8 @@ considerando la temperatura del hormigón es igual a 35 ºC, en función de las 
 mediante simulación",
       x = "Mes",
       y = "Probabilidad")+
-  theme_ridges() +
+  theme_minimal() +
+  scale_fill_viridis()+
   scale_x_continuous(breaks = seq(1, 12, by = 1)) +
   theme(axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
@@ -401,26 +390,22 @@ plot(tasas_de_evaporacion_ridges_T35)
 #######
 
 probabilidades_mensuales_T30 <- ggplot(Simulaciones_finales)+
-  geom_col(mapping = aes(x= month ,y = probabilidad_tasa_mayor_igual_0.5_T30, fill = probabilidad_tasa_mayor_igual_0.5_T30, alpha = 0.5))+
+  geom_col(mapping = aes(x= month ,y = probabilidad_tasa_mayor_igual_0.5_T30, fill = probabilidad_tasa_mayor_igual_0.5_T30))+
   labs(title =  "Probabilidades mensuales de Tasa de evaporacion superior a 0.5",
        subtitle = "Detalle de las probabilidades de que la tasa de evaporación para cada mes sea igual o mayor a 0,5
 considerando la temperatura del hormigón es igual a 30 ºC, en función de las distribuciones obtenidas 
 mediante simulación",
        x = "Mes",
        y = "Probabilidad")+
-  geom_text_repel(aes(x= month ,y = probabilidad_tasa_mayor_igual_0.5_T30,
-                label= sprintf("%0.2f", round(probabilidad_tasa_mayor_igual_0.5_T30, digits = 2)))) +
   theme_minimal() +
   scale_fill_viridis()+
   scale_x_continuous(breaks = seq(1, 12, by = 1)) +
   theme(axis.title.x = element_text(hjust = 0.5),
-        axis.title.y = element_blank(),
-        axis.text.y = element_blank(),
+        axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
-        plot.title.position = "plot") +
-  coord_polar(start = 0)
+        plot.title.position = "plot")
 
 plot(probabilidades_mensuales_T30)
 
