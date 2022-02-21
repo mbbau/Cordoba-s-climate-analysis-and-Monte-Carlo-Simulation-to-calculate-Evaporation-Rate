@@ -1,5 +1,7 @@
 # Córdoba's climate analysis and Monte Carlo Simulation to calculate Evaporation Rate
 
+(This is still a work in progress)
+
 ## Introduction
 
 In this repository, I analyze climate data from Córdoba's City given by the National Meteorologic services of Argentina, in order to obtain the distribution of the evaporation rate for concrete from the climate date by doing a Monte Carlo Simulation.
@@ -28,6 +30,15 @@ The wind's speed distribution are more stable than the other variables previousl
 
 ![Distribuciones de vientos maximos mensuales](https://user-images.githubusercontent.com/61053776/154969866-13de96a0-3b49-4ffa-8f97-3c90b23364dd.png)
 
+
+## Evaporation rate
+
+In order to obtain the evaporation rate I made use of the formulaes presented by **Paul John Uno** in his work [Plastic Shrinkage Cracking and Evaporation Formulas](https://www.researchgate.net/publication/260209439_Plastic_Shrinkage_Cracking_and_Evaporation_Formulas) in order to make the calculation easier to compute, insted of the more well known ACI Nomograph. In his work, **Uno** makes a great reference material to learn about plastic cracks and how the envirommentals factors play their role, so if you want to learn more about this, I encourage you to visit the previous link.
+For this work, I made use of the next formulae:
+
+E = 5 * ( [Tc + 18]^2,5 - r*[Ta + 18]^2,5)*(v + 4) * 10^-6
+
+Where Tc is the temperatura of concrete, Ta is the air temperature, r is the relative humidity and v is the speed of the wind.
 
 
 
