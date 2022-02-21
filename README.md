@@ -36,7 +36,7 @@ The wind's speed distribution are more stable than the other variables previousl
 In order to obtain the evaporation rate I made use of the formulaes presented by **Paul John Uno** in his work [Plastic Shrinkage Cracking and Evaporation Formulas](https://www.researchgate.net/publication/260209439_Plastic_Shrinkage_Cracking_and_Evaporation_Formulas) in order to make the calculation easier to compute, insted of the more well known ACI Nomograph. In his work, **Uno** makes a great reference material to learn about plastic cracks and how the envirommentals factors play their role, so if you want to learn more about this, I encourage you to visit the previous link.
 For this work, I made use of the next formulae:
 
-<img src="https://latex.codecogs.com/svg.image?E&space;=&space;5&space;*&space;(&space;[Tc&space;&plus;&space;18]^2,5&space;-&space;r*[Ta&space;&plus;&space;18]^2,5)*(v&space;&plus;&space;4)&space;*&space;10^{-6}" title="E = 5 * ( [Tc + 18]^2,5 - r*[Ta + 18]^2,5)*(v + 4) * 10^{-6}" />
+<img src="https://latex.codecogs.com/svg.image?E&space;=&space;5&space;*&space;(&space;[T_{c}&space;&plus;&space;18]^{2,5}&space;-&space;r*[T_{a}&space;&plus;&space;18]^{2,5})*(v&space;&plus;&space;4)&space;*&space;10^{-6}" title="E = 5 * ( [T_{c} + 18]^{2,5} - r*[T_{a} + 18]^{2,5})*(v + 4) * 10^{-6}" />
 
 (Thanks to [CodeCogs | Equation Editor](https://editor.codecogs.com/) for rendering the equation)
 
