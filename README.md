@@ -8,7 +8,7 @@ With this distribution I was able to associate plastic crack risk with the month
 
 ## Climate's data
 
-The (National Meteorologic Services of Argentina)[https://www.smn.gob.ar/] in their open data policy, shared with me Córdoba's climate data from the last 60 years. You will be able to find the files with the data in this reppository. With this data, I made ridge plots of the probability distribution for each month, as can be seing in the next figures.
+The [National Meteorologic Services of Argentina](https://www.smn.gob.ar/) in their open data policy, shared with me Córdoba's climate data from the last 60 years. You will be able to find the files with the data in this reppository. With this data, I made ridge plots of the probability distribution for each month, as can be seing in the next figures.
 
 ![Distribucion de temperaturas maximas mensuales](https://user-images.githubusercontent.com/61053776/154969792-a4e70fa0-8195-4128-a7e5-42413a2c860b.png)
 ![Distribucion de humedades relativas mensuales](https://user-images.githubusercontent.com/61053776/154969837-c7070654-0609-497a-904b-412141ca5b29.png)
