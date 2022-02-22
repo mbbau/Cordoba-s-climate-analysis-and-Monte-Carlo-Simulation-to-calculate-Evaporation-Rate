@@ -40,7 +40,7 @@ For this work, I made use of the next equation to calculate the evaporation rate
 
 (Thanks to [CodeCogs | Equation Editor](https://editor.codecogs.com/) for rendering the equation)
 
-Where Tc is the temperatura of concrete, Ta is the air temperature, r is the relative humidity and v is the speed of the wind.
+WhereE is the evaporation rate, Tc is the temperatura of concrete, Ta is the air temperature, r is the relative humidity and v is the speed of the wind.
 
 
 
