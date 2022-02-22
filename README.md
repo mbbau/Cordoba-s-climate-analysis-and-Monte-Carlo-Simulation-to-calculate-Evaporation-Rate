@@ -40,7 +40,23 @@ For this work, I made use of the next equation to calculate the evaporation rate
 
 (Thanks to [CodeCogs | Equation Editor](https://editor.codecogs.com/) for rendering the equation)
 
-WhereE is the evaporation rate, Tc is the temperatura of concrete, Ta is the air temperature, r is the relative humidity and v is the speed of the wind.
+Where E is the evaporation rate, Tc is the temperatura of concrete, Ta is the air temperature, r is the relative humidity and v is the speed of the wind.
+
+## Monte Carlo Simulation
+
+Having the weather parameters and the equation that controls the evaporation rate, I faced the need to set the last variable: the concrete's temperature (Tc).
+For this I defined two posible situations. First, set the concrete's temperature to be equal to the air temperature or set it to be a constant value. Given the fact that the computation to perform was simple and did not consume a great amount of resources, I decided to go througth both paths.
+
+1 - Making the simulation with the concrete temperature equal to the air temperature;
+2 - Setting the concrete's temperature to a constant value (in this case I used 4 values: 20ºC , 25ºC, 30ºC and 35ºc).
+
+The simulation consisted in picking a random sample from the air temperature, the wind's speed and the relative humidity, and calculate the evaporation rate for the both conditions stated above. I repeated this procedure ten thousand times for every month, obtaining this way a monthly distribution for the evaporation rate.
+
+### Case 1: Concrete temperature equal to air temperature
+
+The distribution obtained for this case can be seeing in the figure belove. As the graph shows, in this case the more adverce conditions occur in the last two months of the year, where the means are below 0,5 (condition to consider to be favorable for cracks to develop).
+
+![Distribucion tasas de evaporacion para temp hormigon igual temp ambiente](https://user-images.githubusercontent.com/61053776/155150150-cf567672-860f-47f5-a907-49796f0232df.png)
 
 
 
