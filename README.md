@@ -54,7 +54,7 @@ The simulation consisted in picking a random sample from the air temperature, th
 
 ### Case 1: Concrete temperature equal to air temperature
 
-The distribution obtained for this case can be seeing in the figure belove. As the graph shows, in this case the more adverce conditions occur in the last two months of the year, where the means are below 0,5 (condition to consider to be favorable for cracks to develop).
+The distribution obtained for this case can be seeing in the figure below. As the graph shows, in this case the more adverce conditions occur in the last two months of the year, where the means are below 0,5 (condition to consider to be favorable for cracks to develop).
 
 ![Distribucion tasas de evaporacion para temp hormigon igual temp ambiente](https://user-images.githubusercontent.com/61053776/155150150-cf567672-860f-47f5-a907-49796f0232df.png)
 
