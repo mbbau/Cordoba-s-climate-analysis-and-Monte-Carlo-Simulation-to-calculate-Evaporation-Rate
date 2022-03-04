@@ -206,8 +206,10 @@ names(datos_observatorio_mensual_simulacion)[1] <- "month"
 
 probabilidades_mensuales_tasa_0.5 <- ggplot(datos_observatorio_mensual_simulacion)+
   geom_col(mapping = aes(x= month ,y = probabilidad_tasa_mayor_igual_0.5, fill = probabilidad_tasa_mayor_igual_0.5))+
-  labs(title = "Probabilidades mensuales para tasas de Evaporación",
-       subtitle = "Detalle de las probabilidades de que la tasa de evaporación para cada mes sea igual o mayor a 0,5",
+  labs(title = "Probabilidades mensuales para tasas de Evaporación para Córdoba",
+       subtitle = "Detalle de las probabilidades de que la tasa de evaporación para cada en Córdoba mes sea igual o mayor a 0,5 considerando
+la temperatura del hormigón igual a la temperatura ambiente.
+       ",
        x = "Mes",
        y = "Probabilidad")+
   theme_ridges() +
@@ -462,21 +464,22 @@ probabilidad_0.5_diferentes_temperaturas$temperaturas <- as.double(probabilidad_
 
 evolucion_tasa_evaporación_según_temp_hormigon <- ggplot(probabilidad_0.5_diferentes_temperaturas)+
   geom_line(mapping = aes(x =temperaturas, y = Enero))+
-  geom_line(mapping = aes(x =temperaturas, y = Febrero))+
+  geom_line(mapping = aes(x =temperaturas, y = Febrero), color = "blue", size = 1.1)+
   geom_line(mapping = aes(x =temperaturas, y = Marzo))+
   geom_line(mapping = aes(x =temperaturas, y = Abril))+
   geom_line(mapping = aes(x =temperaturas, y = Mayo))+
   geom_line(mapping = aes(x =temperaturas, y = Junio))+
   geom_line(mapping = aes(x =temperaturas, y = Julio))+
   geom_line(mapping = aes(x =temperaturas, y = Agosto))+
-  geom_line(mapping = aes(x =temperaturas, y = Septiembre))+
+  geom_line(mapping = aes(x =temperaturas, y = Septiembre), color = "red", size = 1.1)+
   geom_line(mapping = aes(x =temperaturas, y = Octubre))+
   geom_line(mapping = aes(x =temperaturas, y = Noviembre))+
   geom_line(mapping = aes(x =temperaturas, y = Diciembre))+
   theme_minimal()+
   labs(x = "Temperatura del hormigón ºC",
        y = "Probabilidad",
-       title = "Tasa de Evaporación vs Temperatura del hormigón")+
+       title = "Tasa de Evaporación vs Temperatura del hormigón",
+       subtitle = "Probabilidad de que la tasa de evaporaciòn sea igual o mayor a 0,5 en función de la temperatura de colocación del hormigón.")+
   theme(axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
