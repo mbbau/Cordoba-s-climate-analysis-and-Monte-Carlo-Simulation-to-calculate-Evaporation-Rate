@@ -12,6 +12,7 @@ library(ggridges)
 library(viridis)
 library(ggrepel)
 library(readxl)
+library(ggtext)
 
 datos_observatorio <- read_excel("Observatorio.xlsx")
 
@@ -489,19 +490,63 @@ nueva_tabla <- probabilidad_0.5_diferentes_temperaturas %>%
                values_to = "Probabilidades",
                names_to = "Mes")
 
+nueva_tabla <- tibble(nueva_tabla)
+nueva_tabla$temperaturas <- as.double(nueva_tabla$temperaturas)
+nueva_tabla$Mes <- as.factor(nueva_tabla$Mes)
+nueva_tabla$Probabilidades <- as.double(nueva_tabla$Probabilidades)
+
+tabla_para_grafico <- nueva_tabla %>%
+  filter(temperaturas == 35) %>%
+  arrange(desc(Probabilidades))
+
 evolucion_tasa_evaporación_según_temp_hormigon_version_pivot <- ggplot(nueva_tabla)+
-  geom_line(mapping = aes(x = temperaturas, y = Probabilidades, color = Mes), size = 1)+
+  geom_line(mapping = aes(x = temperaturas, y = Probabilidades, color = Mes), size = .75, alpha = .75)+
   theme_minimal()+
   labs(x = "Temperatura del hormigón ºC",
        y = "Probabilidad",
        title = "Tasa de Evaporación vs Temperatura del hormigón",
-       subtitle = "Probabilidad de que la tasa de evaporaciòn sea igual o mayor a 0,5 en función de la temperatura de colocación del hormigón.")+
+       subtitle = "Probabilidad de que la tasa de evaporaciòn sea igual o mayor a 0,5 en función de la temperatura de colocación del hormigón
+diferenciado por mes.")+
   theme(axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
-        plot.title.position = "plot")
+        plot.title.position = "plot",
+        panel.grid = element_blank())+
+  scale_color_manual(values = c("Enero" = "grey75",
+                                "Febrero" = "darkgreen",
+                                "Marzo" = "grey75",
+                                "Abril" = "grey75",
+                                "Mayo" = "grey75",
+                                "Junio" = "grey75",
+                                "Julio" = "grey75",
+                                "Agosto" = "grey75",
+                                "Septiembre" = "darkred",
+                                "Octubre" = "grey75",
+                                "Noviembre" = "grey75",
+                                "Diciembre" = "grey75"))+
+  scale_x_continuous(limits = c(20,36.5),
+                     breaks = seq(20,35, by = 1))+
+  scale_y_continuous(limits = c(0,1),
+                     breaks = seq(0,1, by = 0.2))+
+  geom_text(data = nueva_tabla %>% filter(Mes == "Febrero"),
+            aes(label = paste(Mes, "\n")),
+            x = 35.25,
+            color = "darkgreen",
+            y = 0.685,
+            hjust = 0,
+            vjust = 0.75,
+            size = 3,
+            lineheight = 0.9)+
+  geom_text(data = nueva_tabla %>% filter(Mes == "Septiembre"),
+            aes(label = paste(Mes, "\n")),
+            x = 35.25,
+            color = "darkred",
+            y = 0.925,
+            hjust = 0,
+            vjust = 0.75,
+            size = 3,
+            lineheight = 0.9)
 
 plot(evolucion_tasa_evaporación_según_temp_hormigon_version_pivot)
-
