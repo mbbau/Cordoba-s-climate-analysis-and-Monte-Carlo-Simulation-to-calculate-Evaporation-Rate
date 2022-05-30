@@ -554,7 +554,16 @@ evolucion_tasa_evaporación_según_temp_hormigon_version_pivot <- ggplot(nueva_t
             fontface = "bold")+
   geom_segment(y = 0.5, yend = 0.5,
                x = 20, xend = 35,
-             linetype = "dashed")
+             linetype = "dashed")+
+  geom_text(label = "Con 30 grados centígrados,\n 7 meses tienen una probabilidad cercana \n o inferior al 50 % de que la tasa de evaporación \n sobre el hormigón  sea igual o mayor que 0,5", 
+            x = 25.5, 
+            y = 0.84,
+            size = 3.2,
+            lineheight = 1.1)+
+  annotate(geom = "curve", x = 25.5, y = 0.72,
+           xend = 29.5, yend = 0.52,
+           curvature = 0.15,
+           arrow = arrow(length = unit(2, "mm")))
 
 
 plot(evolucion_tasa_evaporación_según_temp_hormigon_version_pivot)
