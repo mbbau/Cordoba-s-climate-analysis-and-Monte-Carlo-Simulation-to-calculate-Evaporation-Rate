@@ -567,3 +567,69 @@ evolucion_tasa_evaporación_según_temp_hormigon_version_pivot <- ggplot(nueva_t
 
 
 plot(evolucion_tasa_evaporación_según_temp_hormigon_version_pivot)
+
+# Preparación para lolipop y gráfico cleveland dots ----
+
+nueva_tabla_ordenada_cleveland <- probabilidad_0.5_diferentes_temperaturas %>% 
+  t()
+
+colnames(nueva_tabla_ordenada_cleveland) <- c("t20", "t25", "t30", "t35") 
+
+nueva_tabla_ordenada_cleveland <- nueva_tabla_ordenada_cleveland[1:12,]
+
+nueva_tabla_ordenada_cleveland <- data.frame(nueva_tabla_ordenada_cleveland)
+
+nueva_tabla_ordenada_cleveland <- nueva_tabla_ordenada_cleveland %>%
+  mutate(mes = c("Enero",
+                 "Febrero",
+                 "Marzo",
+                 "Abril",
+                 "Mayo",
+                 "Junio",
+                 "Julio",
+                 "Agosto",
+                 "Septiembre",
+                 "Octubre",
+                 "Noviembre",
+                 "Diciembre"))
+
+nueva_tabla_ordenada_cleveland <- nueva_tabla_ordenada_cleveland %>%
+  rowwise() %>%
+  mutate(mymean = mean(c(t30,t35))) %>% 
+  arrange(-mymean) %>%
+  mutate(mes = factor(mes, mes))
+
+cleveland_mensual <- ggplot(nueva_tabla_ordenada_cleveland)+
+  geom_segment(aes(x=mes, xend=mes, y=t30, yend=t35), color="grey")+
+  geom_point( aes(x=mes, y=t30), color=rgb(0.2,0.7,0.1,0.5), size=3 ) +
+  geom_point( aes(x=mes, y=t35), color=rgb(0.7,0.2,0.1,0.5), size=3 ) +
+  coord_flip()+
+  theme_minimal() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none",
+    axis.line = element_line(size = 0.5,
+                             color = "black"),
+    plot.title = element_text(hjust = 0, vjust = 0.2, size = 18),
+    plot.subtitle = element_text(hjust = 0, vjust = 1.5, size = 10),
+    plot.title.position = "plot",
+    plot.background = element_rect(fill = "white")) +
+  xlab("")+
+  ylab("")+
+  geom_text(label = "Hormigón a 30°C", 
+            x = 6, 
+            y = 0.43,
+            size = 3.2,
+            lineheight = 1.1,
+            color= rgb(0.2,0.7,0.1,0.5))+
+  geom_text(label = "Hormigón a 35°C", 
+            x = 10, 
+            y = 0.78,
+            size = 3.2,
+            lineheight = 1.1,
+            color= rgb(0.7,0.2,0.1,0.5))+
+  labs(title = "Tasa de Evaporación vs Temperatura del hormigón",
+       subtitle = "Evolución de la probabilidad de que la tasa de evaporación del hormigón sea igual o mayor a 0,5  al pasar \n la temperatura del hormigón de 30°C a 35°C")
+  
+ggsave("Tasas de evaporación.png", width = 7, height = 9)
