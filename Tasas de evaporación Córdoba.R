@@ -68,7 +68,7 @@ hum_relat_ridges <- ggplot(datos_observatorio) +
        x = "Humedad Relativa %",
        y = "Mes") +
   theme_ridges() +
-  theme(
+  theme(plot.background = element_rect(fill = "white"),
     legend.position="none",
     panel.spacing = unit(0.1, "lines"),
     strip.text.x = element_text(size = 8),
@@ -77,6 +77,8 @@ hum_relat_ridges <- ggplot(datos_observatorio) +
     plot.title = element_text(hjust = 0),
     plot.subtitle = element_text(hjust = 0, size = 10),
     plot.title.position = "plot")
+
+ggsave("Distribucion de humedades relativas mensuales.png", width = 6, height = 8)
 
 # Gráfico de distribuciones mensuales de velocidad de viento ----
 
@@ -89,7 +91,7 @@ vto_max_veloc_ridges <- ggplot(datos_observatorio) +
        y = "Mes") +
   theme_ridges() +
   xlim(0,35) + 
-  theme(
+  theme(plot.background = element_rect(fill = "white"),
     legend.position="none",
     panel.spacing = unit(0.1, "lines"),
     strip.text.x = element_text(size = 8),
@@ -99,6 +101,8 @@ vto_max_veloc_ridges <- ggplot(datos_observatorio) +
     plot.subtitle = element_text(hjust = 0, size = 10),
     plot.title.position = "plot"
   )
+
+ggsave("Distribuciones de vientos maximos mensuales.png", width = 6, height = 8)
 
 # Gráfico de distribuciones mensuales de Temperaturas máximas ----
 
@@ -110,7 +114,7 @@ tmax_ridges <- ggplot(datos_observatorio) +
        x = "Temperatura máxima diaria en ºC",
        y = "Mes") +
   theme_ridges() +
-  theme(
+  theme(plot.background = element_rect(fill = "white"),
     legend.position="none",
     panel.spacing = unit(0.1, "lines"),
     strip.text.x = element_text(size = 8),
@@ -121,10 +125,11 @@ tmax_ridges <- ggplot(datos_observatorio) +
     plot.title.position = "plot"
   )
 
+ggsave("Distribucion de temperaturas maximas mensuales.png", width = 6, height = 8)
+
 plot(tmax_ridges)
 plot(hum_relat_ridges)
 plot(vto_max_veloc_ridges)
-
 
 # Ahora que en función de los ridge plots hemos podido establecer que las distribuciones de los parámetros 
 # que usaremos son normales, necesitaremos obtener mes a mes el promedio y el desvio de cada parámetro
@@ -194,11 +199,11 @@ tasas_de_evaporacion_ridges <- ggplot(datos_observatorio_simulados) +
   labs(title = 'Distribución de tasas de evaporación mensuales en Córdoba',
        subtitle = "Distribución de simulación de tasas de evaporación para Córdoba a partir de datos de clima de 1961
 a 2021, considerando que la temperatura del hormigón es aproximadamente igual a la ambiente.",
-       x = "Tasa de evaporación ( Kg/m^2/hr)",
+       x = "Tasa de evaporación (kg/m^2/h)",
        y = "Mes") +
   theme_ridges() +
   scale_x_continuous(breaks = seq(0, 1.5, by = 0.5)) +
-  theme(
+  theme(plot.background = element_rect(fill = "white"),
     legend.position="none",
     panel.spacing = unit(0.1, "lines"),
     strip.text.x = element_text(size = 8),
@@ -208,6 +213,8 @@ a 2021, considerando que la temperatura del hormigón es aproximadamente igual a
     plot.subtitle = element_text(hjust = 0, size = 10),
     plot.title.position = "plot"
   )
+
+ggsave("Distribucion tasas de evaporacion para temp hormigon igual temp ambiente.png", width = 8, height = 6)
 
 plot(tasas_de_evaporacion_ridges)
 
@@ -240,7 +247,8 @@ la temperatura del hormigón igual a la temperatura ambiente.
        y = "Probabilidad")+
   theme_ridges() +
   scale_x_continuous(breaks = seq(1, 12, by = 1)) +
-  theme(legend.position="none",
+  theme(plot.background = element_rect(fill = "white"),
+        legend.position="none",
         panel.spacing = unit(0.1, "lines"),
         strip.text.x = element_text(size = 8),
         axis.title.x = element_text(hjust = 0.5),
@@ -248,6 +256,8 @@ la temperatura del hormigón igual a la temperatura ambiente.
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
         plot.title.position = "plot")
+
+ggsave("Probabilidades tasa mayor a 0.5 para temp hormigon igual a temp ambiente.png", width = 6, height = 8)
 
 plot(probabilidades_mensuales_tasa_0.5)
 
@@ -397,12 +407,15 @@ mediante simulación",
   theme_minimal() +
   scale_fill_viridis()+
   scale_x_continuous(breaks = seq(1, 12, by = 1)) +
-  theme(axis.title.x = element_text(hjust = 0.5),
+  theme(plot.background = element_rect(fill = "white"),
+        axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
         plot.title.position = "plot")
+
+ggsave("Probabilidades tasa mayor a 0.5 para temp hormigon igual a 35.png", width = 6, height = 8)
 
 plot(probabilidades_mensuales_T35)
 
@@ -415,16 +428,19 @@ tasas_de_evaporacion_ridges_T35 <- ggplot(datos_observatorio_simulados_T35) +
   labs(title = 'Distribución de tasas de evaporación mensuales en Córdoba',
        subtitle = "Las distribuciones fueron generadas considerando que la temperatura del hormigón para los cálculos era
 igual a 35 ºC",
-       x = "Tasa de evaporación ( Kg/m^2/hr)",
+       x = "Tasa de evaporación ( kg/m^2/h)",
        y = "Mes") +
   theme_ridges() +
   scale_x_continuous(breaks = seq(0, 1.5, by = 0.5)) +
-  theme(axis.title.x = element_text(hjust = 0.5),
+  theme(plot.background = element_rect(fill = "white"),
+        axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
         plot.title.position = "plot")
+
+ggsave("Distribucion tasas de evaporacion para temp hormigon igual a 35.png", width = 8, height = 6)
 
 plot(tasas_de_evaporacion_ridges_T35)
 
@@ -440,12 +456,15 @@ mediante simulación",
   theme_minimal() +
   scale_fill_viridis()+
   scale_x_continuous(breaks = seq(1, 12, by = 1)) +
-  theme(axis.title.x = element_text(hjust = 0.5),
+  theme(plot.background = element_rect(fill = "white"),
+        axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
         plot.title.position = "plot")
+
+ggsave("Probabilidades tasa mayor a 0.5 para temp hormigon igual a 30.png", width = 6, height = 8)
 
 plot(probabilidades_mensuales_T30)
 
@@ -460,16 +479,19 @@ tasas_de_evaporacion_ridges_T30 <- ggplot(datos_observatorio_simulados_T30) +
   labs(title = 'Distribución de tasas de evaporación mensuales en Córdoba',
        subtitle = "Las distribuciones fueron generadas considerando que la temperatura del hormigón para los cálculos era
 igual a 30 ºC",
-       x = "Tasa de evaporación ( Kg/m^2/hr)",
+       x = "Tasa de evaporación ( kg/m^2/h)",
        y = "Mes") +
   theme_ridges() +
   scale_x_continuous(breaks = seq(0, 1.5, by = 0.5)) +
-  theme(axis.title.x = element_text(hjust = 0.5),
+  theme(plot.background = element_rect(fill = "white"),
+        axis.title.x = element_text(hjust = 0.5),
         axis.title.y = element_text(hjust = 0.5), 
         legend.position="none",
         plot.title = element_text(hjust = 0),
         plot.subtitle = element_text(hjust = 0, size = 10),
         plot.title.position = "plot")
+
+ggsave("Distribucion tasas de evaporacion para temp hormigon igual a 30.png", width = 8, height = 6)
 
 plot(tasas_de_evaporacion_ridges_T30)
 
@@ -505,15 +527,16 @@ evolucion_tasa_evaporación_según_temp_hormigon_version_pivot <- ggplot(nueva_t
   labs(x = "Temperatura del hormigón ºC",
        y = "Probabilidad",
        title = "Tasa de Evaporación vs Temperatura del hormigón",
-       subtitle = "Probabilidad de que la tasa de evaporaciòn sea igual o mayor a 0,5 en función de la temperatura de colocación del hormigón diferenciado por mes.")+
-  theme(axis.title.x = element_text(hjust = 0),
-        axis.title.y = element_text(hjust = 0.95), 
+       subtitle = "Probabilidad de que la tasa de evaporación sea igual o mayor a 0,5 en función de la temperatura de colocación del hormigón diferenciado por mes.")+
+  theme(axis.title.x = element_text(hjust = 0, size = 13),
+        axis.title.y = element_text(hjust = 0.95, size = 13), 
         legend.position="none",
         plot.title = element_text(hjust = 0, size = 20, margin = margin(b = 10)),
         plot.subtitle = element_text(hjust = 0, size = 10, margin = margin(b = 10)),
         plot.title.position = "plot",
         panel.grid = element_blank(),
-        axis.line = element_line(color = "black"))+
+        axis.line = element_line(color = "black"),
+        plot.background = element_rect(fill = "white"))+
   scale_color_manual(values = c("Enero" = "grey75",
                                 "Febrero" = "dodgerblue4",
                                 "Marzo" = "grey75",
@@ -565,6 +588,8 @@ evolucion_tasa_evaporación_según_temp_hormigon_version_pivot <- ggplot(nueva_t
            curvature = 0.15,
            arrow = arrow(length = unit(2, "mm")))
 
+ggsave("Evolución de las tasas de evaporación según la temperatura del hormigón.png", width = 11, height = 6.5)
+
 
 plot(evolucion_tasa_evaporación_según_temp_hormigon_version_pivot)
 
@@ -610,7 +635,7 @@ cleveland_mensual <- ggplot(nueva_tabla_ordenada_cleveland)+
     panel.grid.major.y = element_blank(),
     legend.position="none",
     axis.line = element_line(size = 0.5,
-                             color = "black"),
+                             color = "grey"),
     plot.title = element_text(hjust = 0, vjust = 0.2, size = 18),
     plot.subtitle = element_text(hjust = 0, vjust = 1.5, size = 10),
     plot.title.position = "plot",
@@ -619,17 +644,17 @@ cleveland_mensual <- ggplot(nueva_tabla_ordenada_cleveland)+
   ylab("")+
   geom_text(label = "Hormigón a 30°C", 
             x = 6, 
-            y = 0.43,
+            y = 0.46,
             size = 3.2,
             lineheight = 1.1,
             color= rgb(0.2,0.7,0.1,0.5))+
   geom_text(label = "Hormigón a 35°C", 
             x = 10, 
-            y = 0.78,
+            y = 0.79,
             size = 3.2,
             lineheight = 1.1,
             color= rgb(0.7,0.2,0.1,0.5))+
   labs(title = "Tasa de Evaporación vs Temperatura del hormigón",
-       subtitle = "Evolución de la probabilidad de que la tasa de evaporación del hormigón sea igual o mayor a 0,5  al pasar \n la temperatura del hormigón de 30°C a 35°C")
+       subtitle = "Evolución de la probabilidad de que la tasa de evaporación del hormigón sea igual o mayor a 0,5 \nal pasar  la temperatura del hormigón de 30°C a 35°C para la ciudad de Córdoba.")
   
-ggsave("Tasas de evaporación.png", width = 7, height = 9)
+ggsave("Tasas de evaporación.png", width = 6.5, height = 7.8)
