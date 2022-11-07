@@ -58,5 +58,3 @@ The distribution obtained for this case can be seeing in the figure below. As th
 
 ![Distribucion tasas de evaporacion para temp hormigon igual temp ambiente](https://user-images.githubusercontent.com/61053776/155150150-cf567672-860f-47f5-a907-49796f0232df.png)
 
-
-
