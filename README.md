@@ -52,9 +52,18 @@ For this I defined two posible situations. First, set the concrete's temperature
 
 The simulation consisted in picking a random sample from the air temperature, the wind's speed and the relative humidity, and calculate the evaporation rate for the both conditions stated above. I repeated this procedure ten thousand times for every month, obtaining this way a monthly distribution for the evaporation rate.
 
-### Case 1: Concrete temperature equal to air temperature
+### Case 1: Concrete's temperature equal to air temperature
 
 The distribution obtained for this case can be seeing in the figure below. As the graph shows, in this case the more adverce conditions occur in the last two months of the year, where the means are below 0,5 (condition to consider to be favorable for cracks to develop).
 
 ![Distribucion tasas de evaporacion para temp hormigon igual temp ambiente](https://user-images.githubusercontent.com/61053776/155150150-cf567672-860f-47f5-a907-49796f0232df.png)
 
+### Case 2: Concrete's temperature set to a constant value
+
+In this case I have several distributions for the evaporation rate, and the charts of that distributions can be found in the charts folder. As a summary of the evolution of the evaporation rate, the next figure shows the probability of the evaporation rate to be greater of equal to 0,5 for all the months as the temperature of the concrete raises.
+
+![Evolución de las tasas de evaporación](https://github.com/mbbau/Cordoba-s-climate-analysis-and-Monte-Carlo-Simulation-to-calculate-Evaporation-Rate/blob/main/Charts/Evoluci%C3%B3n%20de%20las%20tasas%20de%20evaporaci%C3%B3n%20seg%C3%BAn%20la%20temperatura%20del%20hormig%C3%B3n.png?raw=true)
+
+The next figure shows the evolution of the mentioned parameter when the concrete's temperature goes from 30 °C to 35 °C.
+
+![Evolución de temperatura de 30 a 35](https://github.com/mbbau/Cordoba-s-climate-analysis-and-Monte-Carlo-Simulation-to-calculate-Evaporation-Rate/blob/main/Charts/Tasas%20de%20evaporaci%C3%B3n.png?raw=true)
