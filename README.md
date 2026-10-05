@@ -1,69 +1,117 @@
-# Córdoba's climate analysis and Monte Carlo Simulation to calculate Evaporation Rate
+# Plastic Shrinkage Cracking Risk in Córdoba: Climate Analysis and Monte Carlo Simulation of Concrete Evaporation Rate
 
-(This is still a work in progress)
+Using 60 years of weather data from Argentina's National Meteorological Service (SMN) and a Monte Carlo simulation, this project estimates, **for each month of the year, the probability that the evaporation rate of fresh concrete in Córdoba exceeds 0.5 kg/m²/h**, the threshold above which plastic shrinkage cracking becomes likely and preventive measures are recommended.
 
-## Introduction
+## Key findings
 
-In this repository, I analyze climate data from Córdoba's City given by the National Meteorologic services of Argentina, in order to obtain the distribution of the evaporation rate for concrete from the climate date by doing a Monte Carlo Simulation.
+With concrete at air temperature, the riskiest period is **October to January**: in November and December, close to **half of the simulated days** exceed the 0.5 kg/m²/h threshold. From May to July the risk is practically zero.
 
-With this distribution I was able to associate plastic crack risk with the month of the year that the concrete is being pour.
+| Month | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| P(E ≥ 0.5 kg/m²/h) | ~39% | ~21% | ~7% | ~2% | ~0% | ~0% | ~0% | ~11% | ~28% | ~37% | ~47% | ~49% |
 
-## Climate's data
+When the concrete is warmer than the air, which is common in hot weather, the risk rises sharply in every month (see Case 2).
 
-The [National Meteorologic Services of Argentina](https://www.smn.gob.ar/) in their open data policy, shared with me Córdoba's climate data from the last 60 years. You will be able to find the files with the data in this reppository. With this data, I made ridge plots of the probability distribution for each month for the variables that interest us in order to obtain the evaporation rate, as can be seing in the next figures.
+## Why it matters
+
+Plastic shrinkage cracks appear in the first hours after placing concrete, when water evaporates from the surface faster than bleed water rises. They are especially common in slabs, floors and pavements exposed to sun and wind, and they are often blamed on the concrete itself when the real cause is the weather and the curing practices. Knowing when the risk is high allows builders to choose better pouring windows and to apply wind breaks, fogging, evaporation retarders or early curing.
+
+## Data
+
+The [SMN](https://www.smn.gob.ar/), under its open data policy, provided daily climate records for Córdoba (Observatorio and Aeropuerto stations, 1961–2021). The files are in the `Data` folder. Data for Mendoza, Posadas and Trelew is also included.
+
+For each month I analyzed the distributions of the variables that drive evaporation.
 
 ### Temperature
 
-The maximun mean temperature occurs ussually between December and January and is aproximatedly around 32º C. The minimum mean occurs around July but for this study we are interested only in hot weather, because it is in this climate that the risk for plastic cracks is higher.
+The highest mean maximum temperatures occur in December and January, around 32 °C. The study focuses on hot weather, when the risk of plastic cracking is highest.
 
-![Distribucion de temperaturas maximas mensuales](https://user-images.githubusercontent.com/61053776/154969792-a4e70fa0-8195-4128-a7e5-42413a2c860b.png)
+![Monthly maximum temperature distribution](https://user-images.githubusercontent.com/61053776/154969792-a4e70fa0-8195-4128-a7e5-42413a2c860b.png)
 
-### Humidity
+### Relative humidity
 
-In Córdoba City, the minimun mean relative humidity occurs around September, being this situation the most adverse for plastic cracks.
+The lowest mean relative humidity in Córdoba occurs around September, the most adverse condition for plastic cracking.
 
-![Distribucion de humedades relativas mensuales](https://user-images.githubusercontent.com/61053776/154969837-c7070654-0609-497a-904b-412141ca5b29.png)
+![Monthly relative humidity distribution](https://user-images.githubusercontent.com/61053776/154969837-c7070654-0609-497a-904b-412141ca5b29.png)
 
-### Wind Speed
+### Wind speed
 
-The wind's speed distribution are more stable than the other variables previously presented, but it can be seeing that the standart deviation is the main factor that makes the last cuarter of the year the most adverce in the case of the speed of wind.
+Wind speed distributions are more stable across the year, but their higher dispersion makes the last quarter the most adverse period.
 
-![Distribuciones de vientos maximos mensuales](https://user-images.githubusercontent.com/61053776/154969866-13de96a0-3b49-4ffa-8f97-3c90b23364dd.png)
-
+![Monthly maximum wind speed distribution](https://user-images.githubusercontent.com/61053776/154969866-13de96a0-3b49-4ffa-8f97-3c90b23364dd.png)
 
 ## Evaporation rate
 
-In order to obtain the evaporation rate I made use of the formulaes presented by **Paul John Uno** in his work [Plastic Shrinkage Cracking and Evaporation Formulas](https://www.researchgate.net/publication/260209439_Plastic_Shrinkage_Cracking_and_Evaporation_Formulas) so that it makes the calculation easier to compute, insted of the more well known ACI Nomograph. In his work, **Uno** makes a great reference material to learn about plastic cracks and how the envirommentals factors play their role, so if you want to learn more about this, I encourage you to visit the previous link.
-For this work, I made use of the next equation to calculate the evaporation rate from the climate's data:
+Instead of the ACI nomograph, I used the equation proposed by **Paul J. Uno** in [Plastic Shrinkage Cracking and Evaporation Formulas](https://www.researchgate.net/publication/260209439_Plastic_Shrinkage_Cracking_and_Evaporation_Formulas), which reproduces the nomograph and is easy to compute. Uno's paper is also an excellent introduction to plastic cracking and the role of environmental factors.
 
-<img src="https://latex.codecogs.com/svg.image?E&space;=&space;5&space;*&space;(&space;[T_{c}&space;&plus;&space;18]^{2,5}&space;-&space;r*[T_{a}&space;&plus;&space;18]^{2,5})*(v&space;&plus;&space;4)&space;*&space;10^{-6}" title="E = 5 * ( [T_{c} + 18]^{2,5} - r*[T_{a} + 18]^{2,5})*(v + 4) * 10^{-6}" />
+$$
+E = 5 \left[ (T_c + 18)^{2.5} - r \,(T_a + 18)^{2.5} \right] (V + 4) \times 10^{-6}
+$$
 
-(Thanks to [CodeCogs | Equation Editor](https://editor.codecogs.com/) for rendering the equation)
+Where:
 
-Where E is the evaporation rate, Tc is the temperatura of concrete, Ta is the air temperature, r is the relative humidity and v is the speed of the wind.
+- **E**: evaporation rate (kg/m²/h)
+- **T<sub>c</sub>**: concrete temperature (°C)
+- **T<sub>a</sub>**: air temperature (°C)
+- **r**: relative humidity (fraction, 0–1)
+- **V**: wind speed (km/h)
 
-## Monte Carlo Simulation
+## Monte Carlo simulation
 
-Having the weather parameters and the equation that controls the evaporation rate, I faced the need to set the last variable: the concrete's temperature (Tc).
-For this I defined two posible situations. First, set the concrete's temperature to be equal to the air temperature or set it to be a constant value. Given the fact that the computation to perform was simple and did not consume a great amount of resources, I decided to go througth both paths.
+For each month, I fitted the distributions of air temperature, relative humidity and wind speed, and drew **10,000 random samples** of each variable to compute 10,000 evaporation rates. From the resulting monthly distribution I estimated the probability of exceeding 0.5 kg/m²/h.
 
-1 - Making the simulation with the concrete temperature equal to the air temperature;
-2 - Setting the concrete's temperature to a constant value (in this case I used 4 values: 20ºC , 25ºC, 30ºC and 35ºc).
+The last variable, the concrete temperature, was handled in two ways:
 
-The simulation consisted in picking a random sample from the air temperature, the wind's speed and the relative humidity, and calculate the evaporation rate for the both conditions stated above. I repeated this procedure ten thousand times for every month, obtaining this way a monthly distribution for the evaporation rate.
+1. **Case 1:** concrete temperature equal to air temperature.
+2. **Case 2:** concrete temperature fixed at 20, 25, 30 and 35 °C.
 
-### Case 1: Concrete's temperature equal to air temperature
+### Case 1: concrete temperature equal to air temperature
 
-The distribution obtained for this case can be seeing in the figure below. As the graph shows, in this case the more adverce conditions occur in the last two months of the year, where the means are below 0,5 (condition to consider to be favorable for cracks to develop).
+November and December are the most adverse months, with the largest share of simulated days above the threshold.
 
-![Distribucion tasas de evaporacion para temp hormigon igual temp ambiente](https://user-images.githubusercontent.com/61053776/155150150-cf567672-860f-47f5-a907-49796f0232df.png)
+![Evaporation rate distribution, concrete at air temperature](https://user-images.githubusercontent.com/61053776/155150150-cf567672-860f-47f5-a907-49796f0232df.png)
 
-### Case 2: Concrete's temperature set to a constant value
+### Case 2: fixed concrete temperature
 
-In this case I have several distributions for the evaporation rate, and the charts of that distributions can be found in the charts folder. As a summary of the evolution of the evaporation rate, the next figure shows the probability of the evaporation rate to be greater of equal to 0,5 for all the months as the temperature of the concrete raises.
+The full distributions are in the `Charts` folder. The figure below summarizes how the probability of exceeding 0.5 kg/m²/h changes with the concrete temperature for every month.
 
-![Evolución de las tasas de evaporación](https://github.com/mbbau/Cordoba-s-climate-analysis-and-Monte-Carlo-Simulation-to-calculate-Evaporation-Rate/blob/main/Charts/Evoluci%C3%B3n%20de%20las%20tasas%20de%20evaporaci%C3%B3n%20seg%C3%BAn%20la%20temperatura%20del%20hormig%C3%B3n.png?raw=true)
+![Probability of exceeding 0.5 kg/m²/h by concrete temperature](Charts/Evolución%20de%20las%20tasas%20de%20evaporación%20según%20la%20temperatura%20del%20hormigón.png)
 
-The next figure shows the evolution of the mentioned parameter when the concrete's temperature goes from 30 °C to 35 °C.
+The next figure zooms in on the change between 30 °C and 35 °C.
 
-![Evolución de temperatura de 30 a 35](https://github.com/mbbau/Cordoba-s-climate-analysis-and-Monte-Carlo-Simulation-to-calculate-Evaporation-Rate/blob/main/Charts/Tasas%20de%20evaporaci%C3%B3n.png?raw=true)
+![Evaporation rate, concrete at 30 °C vs 35 °C](Charts/Tasas%20de%20evaporación.png)
+
+## Repository structure
+
+| Path | Content |
+|---|---|
+| `Data/` | SMN daily climate records (Córdoba Observatorio and Aeropuerto, Mendoza, Posadas, Trelew) |
+| `Tasas de evaporación Córdoba.R` | Main analysis and Monte Carlo simulation for Córdoba |
+| `Tasas de evaporación Mendoza.R`, `... Posadas.R`, `... Trelew.R` | Same analysis for other cities |
+| `Charts/` | All generated figures |
+| `*.Rmd` | Report drafts |
+
+## How to reproduce
+
+1. Install R and the packages: `tidyverse`, `lubridate`, `readxl`, `ggridges`, `viridis`, `ggrepel`, `ggtext`, `skimr`.
+2. Open `Tasas de evaporacion mensuales.Rproj`.
+3. Run `Tasas de evaporación Córdoba.R`. Charts are saved to the working directory.
+
+## Limitations
+
+- Temperature, humidity and wind are sampled **independently** from normal distributions. In reality they are correlated (hot days tend to be drier), and normal sampling can produce out-of-range values.
+- The analysis uses **daily maximum temperature** and **daily maximum wind speed**, a conservative choice.
+- Wind is measured at station height (about 10 m), while the ACI method refers to wind about 0.5 m above the concrete surface. This also makes the results conservative.
+- The probability that E exceeds 0.5 kg/m²/h does not mean the concrete will crack: mix design, curing and site practices also play a major role.
+
+## Next steps
+
+- Resample real historical days (bootstrap) to keep the correlation between variables.
+- Correct wind speed to the height used by the ACI method.
+- Port the analysis to Python and extend it to forecast data, to estimate the hour-by-hour risk for the next days.
+
+## Author
+
+**Matías Baudino**: civil engineer and data professional, former Head of Laboratory and Quality Control at a ready-mix concrete producer in Córdoba.
+
+[LinkedIn](https://www.linkedin.com/in/TU-USUARIO) · [GitHub](https://github.com/mbbau)
