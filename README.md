@@ -4,13 +4,20 @@ Using 60 years of weather data from Argentina's National Meteorological Service 
 
 ## Key findings
 
-With concrete at air temperature, the riskiest period is **October to January**: in November and December, close to **half of the simulated days** exceed the 0.5 kg/m²/h threshold. From May to July the risk is practically zero.
+**Case 1: concrete at air temperature.** The riskiest period is October to January: in November and December, close to **half of the days** exceed 0.5 kg/m²/h. From May to July the risk is practically zero.
 
 | Month | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| P(E ≥ 0.5 kg/m²/h) | ~39% | ~21% | ~7% | ~2% | ~0% | ~0% | ~0% | ~11% | ~28% | ~37% | ~47% | ~49% |
+| P(E ≥ 0.5) | 0.39 | 0.20 | 0.07 | 0.02 | ~0 | 0 | ~0 | 0.12 | 0.28 | 0.36 | 0.46 | 0.49 |
 
-When the concrete is warmer than the air, which is common in hot weather, the risk rises sharply in every month (see Case 2).
+**Case 2: concrete warmer than the air.** When the concrete is placed at 30 °C, 7 months have a probability close to or below 50%. At 35 °C, every month is above 65%, peaking in August and September (~0.92), when humidity is lowest.
+
+| Month | Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| P(E ≥ 0.5), Tc = 30 °C | 0.29 | 0.24 | 0.27 | 0.39 | 0.53 | 0.64 | 0.71 | 0.75 | 0.74 | 0.63 | 0.54 | 0.40 |
+| P(E ≥ 0.5), Tc = 35 °C | 0.71 | 0.67 | 0.69 | 0.77 | 0.83 | 0.86 | 0.88 | 0.91 | 0.92 | 0.86 | 0.84 | 0.77 |
+
+The concrete temperature matters as much as the weather: with warm concrete, even winter months carry a high risk because the air is dry.
 
 ## Why it matters
 
