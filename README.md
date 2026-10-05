@@ -121,4 +121,4 @@ The next figure zooms in on the change between 30 °C and 35 °C.
 
 **Matías Baudino**: civil engineer and data professional, former Head of Laboratory and Quality Control at a ready-mix concrete producer in Córdoba.
 
-[LinkedIn](https://www.linkedin.com/in/TU-USUARIO) · [GitHub](https://github.com/mbbau)
+[LinkedIn](https://www.linkedin.com/in/matias-baudino/) · [GitHub](https://github.com/mbbau)
